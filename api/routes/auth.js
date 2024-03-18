@@ -1,6 +1,5 @@
-import express from "express";
-import { login, logout, refresh, register } from "../controllers/auth.js";
-
+const express = require("express");
+const { login, logout, refresh, register } = require("../controllers/auth.js");
 
 
 const authRouter = express.Router();
@@ -11,4 +10,4 @@ authRouter.get('/refresh' , refresh);
 authRouter.post('/logout' , logout);
 
 
-export default authRouter;
+module.exports = authRouter;
