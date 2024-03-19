@@ -9,6 +9,7 @@ const  register = async (req,res) =>{
         return res.status(422).json({msg: 'Entrada Vazia'})
     }
     const {name , cnpj , password , imgProfile , store_desc} = req.body
+    console.log(name , cnpj , password);
     if (!name){
             return res.status(422).json({msg: 'nome obrigatorio'})
         }
