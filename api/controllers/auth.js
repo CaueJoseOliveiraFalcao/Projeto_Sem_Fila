@@ -60,9 +60,7 @@ const  register = async (req,res) =>{
         const token = jwt.sign({id : user.id} , process.env.TOKEN , {
             expiresIn : process.env.JWT_REFRESH_EXPIRATION
         });
-
-        res.status(200).send({
-            accessToken : token,
+        const data = {
             id : user.id,
             cnpj : user.cnpj,
             name : user.name,
@@ -70,6 +68,10 @@ const  register = async (req,res) =>{
             store_desc : user.store_desc,
             createdAt : user.createdAt,
             updatedAt : user.updatedAt
+        }
+        res.status(200).send({
+            accessToken : token,
+            data : data
         })
     }catch(err){
         console.log(err);
@@ -77,7 +79,21 @@ const  register = async (req,res) =>{
     }
 } 
  const  refresh = (req,res) =>{
+    const token = req.headers.authorization;
 
+    if (!token){
+        return res.status(422).json({msg : 'token nao fornecido corretamente'});
+    }
+    try{
+        const decoded = jwt.verify(token , process.env.TOKEN);
+        res.status(200).send({
+            tokenR : 'true'
+    });
+    }catch(error) {
+        res.status(200).send({
+            tokenR : 'false'
+    });
+    }
 } 
  const  logout = (req,res) =>{
 

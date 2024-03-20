@@ -2,13 +2,14 @@
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import RedAlert from "@/app/components/RedAlert";
 export default function Home() {
   const [cnpj , setCnpj] = useState('');
   const [password , setPassword] = useState('');
   const [alertClass , setAlertClass] = useState('hidden')
   const [alert , setAlert] = useState('');
+  const router = useRouter();
 
   const validCnpj = (cnpj : string) => {
     cnpj = cnpj.replace(/\D/g, '')
@@ -31,9 +32,11 @@ export default function Home() {
     else{
       axios.post('http://localhost:8082/api/auth/login' , {cnpj , password})
       .then((res) => {
-        console.log(res.data);
+        localStorage.setItem("wait-App:token" , res.data.accessToken);
+        const dataConverted = JSON.stringify(res.data.data);
+        localStorage.setItem("wait-App:user" ,  dataConverted);
+        router.push('/StoreDashboard');
       }).catch((err) => {
-        console.log(err.response.data.msg);
         setAlert(err.response.data.msg)
         setAlertClass('');
       })
