@@ -73,8 +73,8 @@ const  register = async (req,res) =>{
             accessToken : token,
             data : data
         })
-    }catch(err){
-        console.log(err);
+    }catch(error){
+        console.log(error);
         return res.status(500).json({msg : error});
     }
 } 

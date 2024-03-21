@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 const CreatePasswordForm = () => {
     const user = localStorage.getItem('wait-App:user');
@@ -11,7 +12,13 @@ const CreatePasswordForm = () => {
     const storeid = convertedUser.id
 
     const Submit = () =>{
-        
+        axios.post('http://localhost:8082/api/store/create' , {clientname , clientpassword , storeid , token})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
     return (
         <div className="w-full max-w-xs">

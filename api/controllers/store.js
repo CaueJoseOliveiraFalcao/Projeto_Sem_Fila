@@ -45,6 +45,26 @@ const createNewClient =  async (req,res) => {
     }
 
 }
+const showClients = async (req,res) => {
+    const {storeid , token} = req.body
+    if (!storeid){
+        res.status(422).json({msg : 'Informe todos os dados'});
+    }
+    if(!token){
+        res.status(422).json({msg : 'Loja sem Token'});
+    }
 
+    try{
+        const decoded = await jwt.verify(token , process.env.TOKEN)
+        const id = storeid
+        const store = await db.Store.findOne({
+            where : {id}
+        })
+        const users = await store.getUsers();
+        res.status(200).json({users})
+    }catch{
+        res.status(422).json({msg : 'Loja Não autorizada'})
+    }
+}
 
-module.exports = {createNewClient};
+module.exports = {createNewClient,showClients};

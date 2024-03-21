@@ -5,11 +5,17 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import RedAlert from "@/app/components/RedAlert";
 export default function Home() {
+
+  const isLoged = localStorage.getItem('wait-App:user');
+  const router = useRouter();
+  if (isLoged){
+    router.push('/StoreDashboard');
+  }
   const [cnpj , setCnpj] = useState('');
   const [password , setPassword] = useState('');
   const [alertClass , setAlertClass] = useState('hidden')
   const [alert , setAlert] = useState('');
-  const router = useRouter();
+
 
   const validCnpj = (cnpj : string) => {
     cnpj = cnpj.replace(/\D/g, '')
