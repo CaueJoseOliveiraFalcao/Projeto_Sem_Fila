@@ -3,6 +3,7 @@ import axios from "axios";
 import { error } from "console";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import CreatePasswordForm from "../components/CreatePasswordForm";
 import { use } from "react";
 
 export default function Home() {
@@ -42,8 +43,9 @@ export default function Home() {
   const storeDesc = convertedUser.store_desc;
    
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-24">
         <h1>Painel de Controle {storeName}</h1>
+        <CreatePasswordForm/>
     </main>
   );
 }

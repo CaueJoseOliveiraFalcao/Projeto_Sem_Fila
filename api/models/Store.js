@@ -4,10 +4,9 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Store extends Model {
     static associate(models) {
-      // defina as associações aqui, se houver
+      Store.hasMany(models.User , {as : 'users' , foreignKey : 'storeid'});
     }
   }
-
   Store.init({
     id: {
       type: DataTypes.INTEGER,
@@ -23,6 +22,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Store',
   });
-
   return Store;
 };
