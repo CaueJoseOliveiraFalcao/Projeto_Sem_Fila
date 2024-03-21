@@ -3,10 +3,15 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const CreatePasswordForm = () => {
-    const [ClientName , setClient] = useState('');
-    const [ClientPassword , setClientPasswors] = useState('');
+    const user = localStorage.getItem('wait-App:user');
+    const token = localStorage.getItem('wait-App:token');
+    const [clientname , setClient] = useState('');
+    const [clientpassword , setClientPasswors] = useState('');
+    const convertedUser = JSON.parse(user);
+    const storeid = convertedUser.id
+
     const Submit = () =>{
-        console.log(ClientName , ClientPassword);
+        
     }
     return (
         <div className="w-full max-w-xs">

@@ -21,7 +21,6 @@ const createNewClient =  async (req,res) => {
             where : {clientpassword}
         })
         if(existOtherPassword){
-            console.log('senha existente');
             return res.status(422).json({msg : 'senha existente'});
         }
         const id = storeid;
@@ -29,7 +28,6 @@ const createNewClient =  async (req,res) => {
             where : {id}
         })
         if(!existStore){
-            console.log('Loja nao existe');
             return res.status(422).json({msg : 'Loja nao existe'});
         }
         const status = 'peding';
