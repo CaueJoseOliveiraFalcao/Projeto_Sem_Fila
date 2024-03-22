@@ -96,7 +96,7 @@ const  register = async (req,res) =>{
     }
 } 
  const  logout = (req,res) =>{
-
+        
 } 
 
 module.exports = { register, login, refresh, logout };
