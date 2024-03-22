@@ -90,13 +90,19 @@ const  register = async (req,res) =>{
             tokenR : 'true'
     });
     }catch(error) {
-        res.status(200).send({
+        res.status(422).send({
             tokenR : 'false'
     });
     }
 } 
- const  logout = (req,res) =>{
-        
-} 
+const logout = async (req, res) => {
+    try {
+
+        return res.status(200).json({ msg: 'Logout bem-sucedido' });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ msg: error });
+    }
+}
 
 module.exports = { register, login, refresh, logout };

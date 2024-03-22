@@ -5,11 +5,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CreatePasswordForm from "../components/CreatePasswordForm";
 import { use, useEffect, useState } from "react";
-
+import LogoutStore from "../components/LogoutStore";
 export default function Home() {
   const router = useRouter();
   const user = localStorage.getItem('wait-App:user');
   const token = localStorage.getItem('wait-App:token');
+  
   const convertedUser = JSON.parse(user);
 
   if(!convertedUser || !token){
@@ -57,6 +58,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
         <h1>Painel de Controle {storeName}</h1>
         <CreatePasswordForm/>
+        <LogoutStore/>
         {storeUsers && storeUsers.map((user) => (
           <div key={user.id}>
             <p>Nome: {user.clientname}</p>
