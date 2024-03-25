@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import CreatePasswordForm from "../components/CreatePasswordForm";
 import { use, useEffect, useState } from "react";
 import LogoutStore from "../components/LogoutStore";
+import { TableOfUsers } from "../components/TableOfUsers";
 export default function Home() {
   const router = useRouter();
   const user = localStorage.getItem('wait-App:user');
@@ -42,29 +43,14 @@ export default function Home() {
   const storecnpj = convertedUser.cnpj;
   const storeImg = convertedUser.imgProfile;
   const storeDesc = convertedUser.store_desc;
-  const [storeUsers, setStoreUsers] = useState([]); 
-  useEffect(() =>{
-    axios.post('http://localhost:8082/api/store/show' , {token , storeid})
-    .then((res) => {
-      setStoreUsers(res.data.users);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-},[])
-
+  const [storeUsers, setStoreUsers] = useState([]);
    
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
         <h1>Painel de Controle {storeName}</h1>
         <CreatePasswordForm/>
         <LogoutStore/>
-        {storeUsers && storeUsers.map((user) => (
-          <div key={user.id}>
-            <p>Nome: {user.clientname}</p>
-            <p>Status: {user.status}</p>
-          </div>
-        ))}
+        <TableOfUsers/>
     </main>
   );
 }

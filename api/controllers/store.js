@@ -5,16 +5,10 @@ const createNewClient =  async (req,res) => {
     const {storeid , clientname , clientpassword , token} = req.body
     const tokenisT = false
     if (!clientname || !clientpassword || !storeid){
-        res.status(422).json({msg : 'Informe todos os dados'});
+        return res.status(422).json({msg : 'Informe todos os dados'});
     }
     if(!token){
-        res.status(422).json({msg : 'Loja sem Token'});
-    }
-    
-    try{
-        const decoded = jwt.verify(token , process.env.TOKEN)
-    }catch{
-        res.status(422).json({msg : 'Loja Não autorizada'})
+        return res.status(422).json({msg : 'Loja sem Token'});
     }
     try{
         const existOtherPassword = await db.User.findOne({
@@ -48,10 +42,10 @@ const createNewClient =  async (req,res) => {
 const showClients = async (req,res) => {
     const {storeid , token} = req.body
     if (!storeid){
-        res.status(422).json({msg : 'Informe todos os dados'});
+        return res.status(422).json({msg : 'Informe todos os dados'});
     }
     if(!token){
-        res.status(422).json({msg : 'Loja sem Token'});
+        return res.status(422).json({msg : 'Loja sem Token'});
     }
 
     try{
@@ -61,9 +55,9 @@ const showClients = async (req,res) => {
             where : {id}
         })
         const users = await store.getUsers();
-        res.status(200).json({users})
+        return res.status(200).json({users})
     }catch{
-        res.status(422).json({msg : 'Loja Não autorizada'})
+        return res.status(422).json({msg : 'Loja Não autorizada'})
     }
 }
 
