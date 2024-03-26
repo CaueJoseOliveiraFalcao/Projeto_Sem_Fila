@@ -6,38 +6,13 @@ import { useRouter } from "next/navigation";
 import RedAlert from "@/app/components/RedAlert";
 export default function Home() {
 
-  const isLoged = localStorage.getItem('wait-App:user');
-  const token = localStorage.getItem('wait-App:token');
   const router = useRouter();
-
   const [cnpj , setCnpj] = useState('');
   const [password , setPassword] = useState('');
   const [alertClass , setAlertClass] = useState('hidden')
   const [alert , setAlert] = useState('');
 
 
-  useEffect(() => {
-    if (isLoged){
-      axios.get('http://localhost:8082/api/auth/refresh', {
-        headers: {
-          authorization: `${token}`
-        }
-      })
-      .then(response => {
-        if (response.status === 200) {
-          router.push('/StoreDashboard');
-        }
-      })
-      .catch(error => {
-        if (error.response && error.response.status === 403) {
-          // Token inválido ou expirado, exiba uma mensagem de erro ou redirecione para uma página de erro.
-          console.log("Token inválido ou expirado");
-        } else {
-          console.log("Erro ao verificar token:", error);
-        }
-      });
-    }
-  },[])
 
 
   const validCnpj = (cnpj : string) => {

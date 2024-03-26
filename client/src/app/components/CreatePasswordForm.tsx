@@ -12,7 +12,11 @@ const CreatePasswordForm = () => {
     const storeid = convertedUser.id
 
     const Submit = () =>{
-        axios.post('http://localhost:8082/api/store/create' , {clientname , clientpassword , storeid , token})
+        axios.post('http://localhost:8082/api/store/create' , {clientname , clientpassword , storeid , token} , {
+            headers : {
+                authorization : `${token}`
+            }
+        })
         .then((res) => {
             console.log(res);
         })

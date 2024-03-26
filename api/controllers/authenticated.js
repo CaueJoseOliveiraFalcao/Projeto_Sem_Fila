@@ -8,7 +8,7 @@ const isAuthenticated = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+        const decoded = jwt.verify(token, process.env.TOKEN);
         req.user = decoded; // Adicione o usuário decodificado ao objeto de requisição para que possa ser acessado nos controladores
         next();
     } catch (error) {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaTrash , FaExchangeAlt  } from "react-icons/fa";
 
@@ -6,18 +7,25 @@ export const TableOfUsers = () => {
     const user = localStorage.getItem('wait-App:user');
     const token = localStorage.getItem('wait-App:token');
     const convertedUser = JSON.parse(user);
+    const router = useRouter();
     const [storeUsers , setStoreUsers] = useState([]);
 
     const storeid = convertedUser.id;
     useEffect(() =>{
-        axios.post('http://localhost:8082/api/store/show' , {token , storeid})
+        axios.post('http://localhost:8082/api/store/show' , {token , storeid} , {
+            headers : {
+                authorization : `${token}`
+            }
+        })
         .then((res) => {
           setStoreUsers(res.data.users);
         })
         .catch((err) => {
-          console.log(err);
+            router.push
         })
     },[])
+
+
     console.log(storeUsers);
     return(
         <div className="w-full">
@@ -40,8 +48,20 @@ export const TableOfUsers = () => {
                     <td className="text-left px-4 py-2">{user.clientname}</td>
                     <td className="text-left px-4 py-2">{user.clientpassword}</td>
                     <td className="text-left px-4 py-2">{user.status}</td>
-                    <td className="text-left px-4 py-2 "><span className="flex justify-center items-center cursor-pointer"><FaTrash/></span></td>
-                    <td className="text-center px-4 py-2 "><span  className="flex justify-center items-center cursor-pointer"><FaExchangeAlt/></span></td>
+                    <td className="text-left px-4 py-2 ">
+                        <span className="flex justify-center items-center cursor-pointer">
+                            <a href={`http://localhost:8082/api/store/delete/${user.id}`}>
+                                <FaTrash/>
+                            </a>
+                        </span>
+                    </td>
+                    <td className="text-center px-4 py-2 ">
+                        <span  className="flex justify-center items-center cursor-pointer">
+                        <a href={`http://localhost:8082/api/store/delete/${user.id}`}>
+                            <FaExchangeAlt/>
+                        </a>
+                        </span>
+                    </td>
                 </tr>
                 ))}
             </tbody>

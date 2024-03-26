@@ -2,13 +2,9 @@ const jwt = require('jsonwebtoken')
 const db = require("../models/index.js");
 
 const createNewClient =  async (req,res) => {
-    const {storeid , clientname , clientpassword , token} = req.body
-    const tokenisT = false
+    const {storeid , clientname , clientpassword} = req.body
     if (!clientname || !clientpassword || !storeid){
         return res.status(422).json({msg : 'Informe todos os dados'});
-    }
-    if(!token){
-        return res.status(422).json({msg : 'Loja sem Token'});
     }
     try{
         const existOtherPassword = await db.User.findOne({
@@ -40,16 +36,12 @@ const createNewClient =  async (req,res) => {
 
 }
 const showClients = async (req,res) => {
-    const {storeid , token} = req.body
+    const {storeid } = req.body
     if (!storeid){
         return res.status(422).json({msg : 'Informe todos os dados'});
     }
-    if(!token){
-        return res.status(422).json({msg : 'Loja sem Token'});
-    }
 
     try{
-        const decoded = await jwt.verify(token , process.env.TOKEN)
         const id = storeid
         const store = await db.Store.findOne({
             where : {id}
@@ -60,5 +52,8 @@ const showClients = async (req,res) => {
         return res.status(422).json({msg : 'Loja Não autorizada'})
     }
 }
+const deleteClient = (req,res) => {
+    return res.json({msg : 'deletado'});
+}
 
-module.exports = {createNewClient,showClients};
+module.exports = {createNewClient,showClients, deleteClient};
