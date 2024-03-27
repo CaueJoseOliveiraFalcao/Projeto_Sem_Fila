@@ -12,7 +12,7 @@ export const TableOfUsers = () => {
 
     const storeid = convertedUser.id;
     useEffect(() =>{
-        axios.post('http://localhost:8082/api/store/show' , {token , storeid} , {
+        axios.post('http://localhost:8082/api/store/show' , {storeid} , {
             headers : {
                 authorization : `${token}`
             }
@@ -25,7 +25,32 @@ export const TableOfUsers = () => {
         })
     },[])
 
-
+    const deleteUser = (id : any) => {
+        axios.post('http://localhost:8082/api/store/delete' , {id} , {
+            headers : {
+                authorization : `${token}`
+            }
+        })
+        .then((res) => {
+            window.location.reload();
+        })
+        .catch((err : any) => {
+            console.log(err)
+        })
+    }
+    const ChangeStatus = (id : any) => {
+        axios.post('http://localhost:8082/api/store/change' , {id} , {
+            headers : {
+                authorization : `${token}`
+            }
+        })
+        .then((res) => {
+            window.location.reload();
+        })
+        .catch((err : any) => {
+            console.log(err)
+        })
+    }
     console.log(storeUsers);
     return(
         <div className="w-full">
@@ -50,16 +75,16 @@ export const TableOfUsers = () => {
                     <td className="text-left px-4 py-2">{user.status}</td>
                     <td className="text-left px-4 py-2 ">
                         <span className="flex justify-center items-center cursor-pointer">
-                            <a href={`http://localhost:8082/api/store/delete/${user.id}`}>
+                            <button onClick={() => (deleteUser(user.id))} >
                                 <FaTrash/>
-                            </a>
+                            </button>
                         </span>
                     </td>
                     <td className="text-center px-4 py-2 ">
                         <span  className="flex justify-center items-center cursor-pointer">
-                        <a href={`http://localhost:8082/api/store/delete/${user.id}`}>
+                        <button onClick={() => (ChangeStatus(user.id))}>
                             <FaExchangeAlt/>
-                        </a>
+                        </button>
                         </span>
                     </td>
                 </tr>

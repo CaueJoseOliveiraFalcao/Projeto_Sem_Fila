@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
   const user = localStorage.getItem('wait-App:user');
   const token = localStorage.getItem('wait-App:token');
-  
+
   const convertedUser = JSON.parse(user);
 
   if(!convertedUser || !token){

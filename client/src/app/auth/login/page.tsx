@@ -108,6 +108,7 @@ export default function Home() {
                 Sign in
               </button>
             </div>
+            <a href="/auth/register">Nao tem login?</a>
           </form>
         </div>
       </div>

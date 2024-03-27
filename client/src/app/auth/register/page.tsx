@@ -125,6 +125,7 @@ export default function Home() {
                 Sign in
               </button>
             </div>
+            <a href="/auth/login">Ja tem cadastro?</a>
           </form>
         </div>
       </div>

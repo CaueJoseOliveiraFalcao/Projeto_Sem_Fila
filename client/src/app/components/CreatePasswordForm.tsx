@@ -18,7 +18,7 @@ const CreatePasswordForm = () => {
             }
         })
         .then((res) => {
-            console.log(res);
+                window.location.reload();
         })
         .catch((err) => {
             console.log(err);
@@ -47,6 +47,7 @@ const CreatePasswordForm = () => {
             className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
             id="password" 
             type="text" 
+            required
             onChange={(e) => setClientPasswors(e.target.value)}/>
             </div>
             <div className="flex items-center justify-between">
