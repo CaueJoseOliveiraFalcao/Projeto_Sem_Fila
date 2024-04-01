@@ -19,7 +19,7 @@ export default function Home() {
       
       <h1 className="text-center text-4xl p-5">Painel de lojas</h1>
       <div className="w-full justify-center flex items-center">
-        <a href="/auth/login">Painel de controle da Loja</a>
+        <a  href="/auth/login">Painel de controle da Loja</a>
       </div>
 
       <div className="cards flex flex-wrap justify-center mt-3">
