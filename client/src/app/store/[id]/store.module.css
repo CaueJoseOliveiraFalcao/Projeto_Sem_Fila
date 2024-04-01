@@ -1,0 +1,9 @@
+.bgM{
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, .40) url('../../bing.jpg');
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}

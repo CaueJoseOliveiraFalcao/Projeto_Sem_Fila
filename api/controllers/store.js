@@ -10,6 +10,37 @@ const showAllStores = async(req,res) => {
         return res.status(422).json({msg : error})
     }
 }
+const showStoreDataAndUsersStoreData = async(req, res) => {
+    const {id} = req.body
+    if(!id){
+        return res.status(422).json({msg : 'Sem informações primarias da loja'});
+    }
+    try {
+        const store = await db.Store.findOne({
+            where : {id}
+        })
+
+        if(!store){
+            return res.status(422).json({msg : 'Loja nao existe'});
+        }
+        const users = await store.getUsers()
+        return res.status(200).json({data : {
+            storeif : {
+                id : store.id,
+                cnpj : store.cnpj,
+                name : store.name,
+                imgProfile : store.imgProfile,
+                storeDesc : store.store_desc,
+                created : store.createdAt,
+                updated : store.updatedAt
+            },
+            users : users
+        }});
+    }
+    catch(error){
+        return res.status(422).json({msg : error});
+    }
+}
 const createNewClient =  async (req,res) => {
     const {storeid , clientname , clientpassword} = req.body
     if (!clientpassword || !storeid){
@@ -96,4 +127,5 @@ const changeStatus = async (req,res) => {
         return res.status(500).json({msg: error});
     }
 }
-module.exports = {createNewClient,showClients, deleteClient , changeStatus , showAllStores};
+
+module.exports = {createNewClient,showClients, deleteClient , changeStatus , showAllStores ,showStoreDataAndUsersStoreData};
