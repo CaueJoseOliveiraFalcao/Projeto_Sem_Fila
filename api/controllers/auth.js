@@ -36,7 +36,51 @@ const  register = async (req,res) =>{
             imgProfile,
             store_desc
         });
-        return res.status(200).json({msg : 'cadastro efetudado'});
+        const user = await db.Store.findOne({
+            where : {cnpj}
+        });
+        const userId = user.id
+
+        if (imgProfile != null){
+            const imgtype = image.type.split('/')[1];
+\
+            const filename = `1.${imgtype}`
+        
+            const GOOGLE_API_ID =  '1ox-MbUfndF-Cx1raOrMCLoMOL5C8NCov';
+  
+              try{
+                const auth = new google.auth.GoogleAuth({
+                  keyFile : './senacimg-0baa483cca52.json',
+                  scopes : ['https://www.googleapis.com/auth/drive']
+                })
+  
+                const driveService = google.drive({
+                  version : 'v3',
+                  auth
+                })
+  
+                const fileMetaData = {
+                  'name' : filename,
+                  'parents' : [GOOGLE_API_ID]
+                }
+  
+                const media = {
+                  MimeType : `image/${imgtype}`,
+                  body : image
+                }
+  
+                const response = await driveService.files.create({
+                  requestBody : fileMetaData,
+                  media : media,
+                  fields : 'id'
+                })
+                return response.data.id;
+              }catch(err){
+                console.log(err);
+              }
+            }
+        }
+        return res.status(200).json(userId);
     }catch(error){
         console.log(error);
         return res.status(500).json({msg : error});
