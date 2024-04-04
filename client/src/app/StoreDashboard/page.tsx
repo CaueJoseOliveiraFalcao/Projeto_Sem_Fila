@@ -1,10 +1,8 @@
 'use client'
 import axios from "axios";
-import { error } from "console";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CreatePasswordForm from "../components/CreatePasswordForm";
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
 import LogoutStore from "../components/LogoutStore";
 import { TableOfUsers } from "../components/TableOfUsers";
 export default function Home() {

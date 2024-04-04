@@ -2,14 +2,40 @@ const { query } = require("express");
 const db = require("../models/index.js");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const fs = require('fs');
+const upload = async (req,res) =>{
+        const userId = req.body.userId;
+        console.log(userId);
+        const storage = multer.diskStorage({
+            destination : function(req , file ,cb) {
+                cb(null , `${__dirname}/public`)
+            },
+            filename : function(req ,file , cb) {
+                cb(null , Date.now() + ".jpg");
+            }
+        })
 
+        const upload = multer({storage}).single("file");
+
+        upload(req , res , function(err) {
+            if (err instanceof multer.MulterError){
+                res.status(500).send(err)
+            }
+            else if (err){
+
+            }
+            console.log(req.file.filename);
+            res.status(200).send('foi')
+        })
+    }
 const  register = async (req,res) =>{
     
     if (!req.body){
         return res.status(422).json({msg: 'Entrada Vazia'})
     }
     const {name , cnpj , password , imgProfile , store_desc} = req.body
-    console.log(name , cnpj , password);
+    console.log(imgProfile);
     if (!name){
             return res.status(422).json({msg: 'nome obrigatorio'})
         }
@@ -41,51 +67,12 @@ const  register = async (req,res) =>{
         });
         const userId = user.id
 
-        if (imgProfile != null){
-            const imgtype = image.type.split('/')[1];
-\
-            const filename = `1.${imgtype}`
-        
-            const GOOGLE_API_ID =  '1ox-MbUfndF-Cx1raOrMCLoMOL5C8NCov';
-  
-              try{
-                const auth = new google.auth.GoogleAuth({
-                  keyFile : './senacimg-0baa483cca52.json',
-                  scopes : ['https://www.googleapis.com/auth/drive']
-                })
-  
-                const driveService = google.drive({
-                  version : 'v3',
-                  auth
-                })
-  
-                const fileMetaData = {
-                  'name' : filename,
-                  'parents' : [GOOGLE_API_ID]
-                }
-  
-                const media = {
-                  MimeType : `image/${imgtype}`,
-                  body : image
-                }
-  
-                const response = await driveService.files.create({
-                  requestBody : fileMetaData,
-                  media : media,
-                  fields : 'id'
-                })
-                return response.data.id;
-              }catch(err){
-                console.log(err);
-              }
-            }
-        }
-        return res.status(200).json(userId);
-    }catch(error){
-        console.log(error);
-        return res.status(500).json({msg : error});
-    } 
-    }
+
+    }catch(error) {
+        return res.status(422).json({msg : error});
+    }}
+
+    
  const login = async (req,res) =>{
     try{
         const {cnpj , password} = req.body;
@@ -149,4 +136,4 @@ const logout = async (req, res) => {
     }
 }
 
-module.exports = { register, login, refresh, logout };
+module.exports = { register, login, refresh, logout , upload};
