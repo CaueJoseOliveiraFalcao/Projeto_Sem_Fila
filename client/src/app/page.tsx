@@ -14,13 +14,13 @@ export default function Home() {
     .catch((error) => {
       console.log(error)
     })
-  })
+  }, []);
   return (
     <main className="h-full">
       
       <h1 className="text-center text-4xl p-5">Painel de lojas</h1>
       <div className="w-full justify-center flex items-center">
-        <a  href="/auth/login">Painel de controle da Loja</a>
+        <a  href="/StoreDashboard">Painel de controle da Loja</a>
       </div>
 
       <div className="cards flex flex-wrap justify-center mt-3">
@@ -28,7 +28,7 @@ export default function Home() {
         {stores.map(store => (
           <div className=" w-1/6 m-1 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
-                    <img className="rounded-t-lg" src="https://stcotvfoco.com.br/2023/10/McDonalds-1.png" alt="" />
+                    <img className="rounded-t-lg" style={'object-fit: cover;'} src={store.imgProfile ? store.imgProfile : 'https://stcotvfoco.com.br/2023/10/McDonalds-1.png'} alt="" />
                 </a>
           <div className="p-5">
                     <a href="#">
