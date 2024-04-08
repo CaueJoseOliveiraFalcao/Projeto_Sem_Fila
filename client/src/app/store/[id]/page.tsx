@@ -30,9 +30,12 @@ export default function PublicStorePage({ params }: { params: { id: string } }) 
                     <div className="flex justify-center items-center">
                         <ul className=" bg-gray-300 w-96 rounded-xl text-black">
                             {users.map((user, index) => (
+                            <div>
                                 <li className=" text-center my-4 " key={index}>
                                     {user.clientname ? user.clientname : 'Senha sem Nome'} - {user.clientpassword} - {user.status === 'completed' ? 'Pedido Pronto' : 'Pedido em Preparo'}
                                 </li>
+                            </div>
+
                             ))}
                         </ul>
                     </div>

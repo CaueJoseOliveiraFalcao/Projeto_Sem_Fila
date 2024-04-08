@@ -4,35 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const fs = require('fs');
-const upload = async (req,res) =>{
-    const token = req.headers.authorization;
 
-    const decoded = jwt.verify(token , process.env.TOKEN);
-    const userId = decoded.id;
-    console.log(userId);
-        const storage = multer.diskStorage({
-            destination : function(req , file ,cb) {
-                cb(null , `${__dirname}/public`)
-            },
-            filename : function(req ,file , cb) {
-                cb(null , `${userId}` + ".jpg");
-            }
-        })
-
-        const upload = multer({storage}).single("file");
-
-        upload(req , res , function(err) {
-            if (err instanceof multer.MulterError){
-                res.status(500).send(err)
-            }
-            else if (err){
-
-            }
-
-            console.log(req.file.filename);
-            res.status(200).send('foi')
-        })
-    }
 const  register = async (req,res) =>{
     
     if (!req.body){
@@ -140,4 +112,4 @@ const logout = async (req, res) => {
     }
 }
 
-module.exports = { register, login, refresh, logout , upload};
+module.exports = { register, login, refresh, logout };
