@@ -127,5 +127,29 @@ const changeStatus = async (req,res) => {
         return res.status(500).json({msg: error});
     }
 }
+const changeInfo = async (req , res) =>{
+    const {name , store_desc , } = req.body;
+    const token = req.headers.authorization;
 
-module.exports = {createNewClient,showClients, deleteClient , changeStatus , showAllStores ,showStoreDataAndUsersStoreData};
+    if (!name || !store_desc){
+        return res.status(422).json({msg: 'envie todas as informações requiridas'});
+    }
+    try {
+        const decoded = jwt.verify(token , process.env.TOKEN);
+        id = decoded.id;
+    
+        const user = await db.Store.findOne({
+            where : {id}
+        })
+        if (user) {
+            user.name = name,
+            user.store_desc = store_desc
+            await user.save();
+            return res.status(200).json({msg: 'Mudanças efetuadas'});
+        }
+    }catch(err){
+        return res.status(500).json({msg: err});
+    }
+
+}
+module.exports = {createNewClient,showClients, deleteClient , changeStatus , showAllStores ,showStoreDataAndUsersStoreData , changeInfo};

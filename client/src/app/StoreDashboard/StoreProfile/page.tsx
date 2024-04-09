@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState , useEffect} from "react";
+import ChangeStoreProfileInfo from "@/app/components/ChangeStoreProfileInfo";
 export default function Home() {
   const router = useRouter();
   const user = localStorage.getItem('wait-App:user');
@@ -95,6 +96,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col  items-center p-24">
         <p>Store Profile</p>
+        <ChangeStoreProfileInfo/>
         <div>
               <div className="flex items-center justify-between flex-col">
                 <label htmlFor="img" className="block text-sm font-medium leading-6 text-gray-900">
