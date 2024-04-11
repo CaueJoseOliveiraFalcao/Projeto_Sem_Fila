@@ -44,7 +44,7 @@ const showStoreDataAndUsersStoreData = async(req, res) => {
 const createNewClient =  async (req,res) => {
     const {storeid , clientname , clientpassword} = req.body
     if (!clientpassword || !storeid){
-        return res.status(422).json({msg : 'Informe todos os dados'});
+        return res.status(422).json({msg : 'Necessario Senha'});
     }
     try{
         const existOtherPassword = await db.User.findOne({
@@ -70,8 +70,7 @@ const createNewClient =  async (req,res) => {
         });
         return res.status(200).json({msg : 'cadastro efetudado'});
     }catch(error){
-        console.log(error);
-        return res.status(500).json({msg : error});
+        return res.status(500).json({msg : 'erro a criaçao de senha'});
     }
 
 }

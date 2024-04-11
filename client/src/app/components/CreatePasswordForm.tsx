@@ -4,6 +4,9 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 const CreatePasswordForm = () => {
+    const [Error , SetError] = useState(false);
+    const [ErrorMsg , SetErrorMsg] = useState("");
+
     const user = localStorage.getItem('wait-App:user');
     const token = localStorage.getItem('wait-App:token');
     const [clientname , setClient] = useState('');
@@ -21,7 +24,9 @@ const CreatePasswordForm = () => {
                 window.location.reload();
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err.response.data.msg);
+            SetErrorMsg(err.response.data.msg);
+            SetError(true);
         })
     }
     return (
@@ -44,12 +49,19 @@ const CreatePasswordForm = () => {
                 Nova Senha
             </label>
             <input 
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-0 leading-tight focus:outline-none focus:shadow-outline" 
             id="password" 
             type="text" 
             required
             onChange={(e) => setClientPasswors(e.target.value)}/>
             </div>
+            {Error === true && (
+                <p className='bg-red-500 p-5 mb-5 mt-0 text-sm rounded-md text-white'>
+                    {ErrorMsg}
+                </p>
+            )}
+
+            
             <div className="flex items-center justify-between">
             <button onClick={Submit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                 Enviar

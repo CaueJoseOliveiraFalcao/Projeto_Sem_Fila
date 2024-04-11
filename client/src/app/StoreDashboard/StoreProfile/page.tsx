@@ -5,17 +5,7 @@ import { useState , useEffect} from "react";
 import ChangeStoreProfileInfo from "@/app/components/ChangeStoreProfileInfo";
 export default function Home() {
   const router = useRouter();
-  const user = localStorage.getItem('wait-App:user');
   const token = localStorage.getItem('wait-App:token');
-  const [error, setError] = useState<string | null>(null);
-  const [image, setImage] = useState<File | null>(null);
-  const [UrlImage , setUrlImage] = useState('');
-  const convertedUser = JSON.parse(user);
-  const userId = convertedUser.id;
-
-  if(!convertedUser || !token){
-    router.push('/auth/login/');
-  }
   axios.get('http://localhost:8082/api/auth/refresh', {
     headers: {
       authorization: `${token}`
@@ -36,6 +26,19 @@ export default function Home() {
   .catch(error => {
     router.push('/auth/login');
   });
+
+
+  const user = localStorage.getItem('wait-App:user');
+  const [error, setError] = useState<string | null>(null);
+  const [image, setImage] = useState<File | null>(null);
+  const [UrlImage , setUrlImage] = useState('');
+  const convertedUser = JSON.parse(user);
+  const userId = convertedUser.id ? convertedUser.id : '';
+
+  if(!convertedUser || !token){
+    router.push('/auth/login/');
+  }
+
 
     useEffect(() => {
       axios.post("http://localhost:8082/api/img/seachProfile" , {userId} , {
