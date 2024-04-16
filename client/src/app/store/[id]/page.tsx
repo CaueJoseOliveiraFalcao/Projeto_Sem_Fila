@@ -25,7 +25,7 @@ export default function PublicStorePage({ params }: { params: { id: string } }) 
     useEffect(() => {
         setTimeout(() => {
             window.location.reload();
-        } , "15000");
+        } , "10000");
 
     },[])
     if (storeInfo && users) {
