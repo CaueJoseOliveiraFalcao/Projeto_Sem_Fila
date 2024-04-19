@@ -12,7 +12,7 @@ export default function Home() {
 
   const convertedUser = JSON.parse(user);
 
-  if(!convertedUser || !token){
+  if(convertedUser === null || token === null){
     router.push('/auth/login/');
   }
   axios.get('http://localhost:8082/api/auth/refresh', {
@@ -34,21 +34,28 @@ export default function Home() {
   .catch(error => {
     router.push('/auth/login');
   });
+  const storeName = convertedUser ? convertedUser.name : '';
 
-
-  const storeName = convertedUser.name;
-  const storeid = convertedUser.id;
-  const storecnpj = convertedUser.cnpj;
-  const storeImg = convertedUser.imgProfile;
-  const storeDesc = convertedUser.store_desc;
+  const storeid = convertedUser ? convertedUser.id : '';
+  const storecnpj = convertedUser ? convertedUser.cnpj : '';
+  const storeImg = convertedUser ? convertedUser.imgProfile : '';
+  const storeDesc = convertedUser ? convertedUser.store_desc : '';
   const [storeUsers, setStoreUsers] = useState([]);
+
+
    
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-        <h1>Painel de Controle {storeName}</h1>
-        <CreatePasswordForm/>
-        <LogoutStore/>
-        <TableOfUsers/>
+
+        <h1>Painel de Controle {storeName ? storeName : ''}</h1>
+        {storeName &&
+            <>
+            <CreatePasswordForm/>
+            <LogoutStore/>
+            <TableOfUsers/>
+          </>
+        }
+
     </main>
   );
 }

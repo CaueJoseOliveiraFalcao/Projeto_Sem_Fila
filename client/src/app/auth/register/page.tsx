@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import RedAlert from "@/app/components/RedAlert";
-
+import style from '../auth.module.css'
+import Image from 'next/image';
 export default function Home() {
   const [cnpj , setCnpj] = useState('');
   const [name , setName] = useState('');
@@ -48,16 +49,17 @@ export default function Home() {
   }
   return (
     
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="flex flex-col justify-center items-center text-white mt-4 mb-4">
+      <div className={style.main_div}>
 
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Store Registration Form
+        <div className="flex justify-center items-center flex-col">
+          <Image
+           src='/mascote_sentado.png'
+           width={250}
+           height={250}
+           />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight ">
+            Registro de Lojas
           </h2>
         </div>
 
@@ -65,7 +67,7 @@ export default function Home() {
           <form className="space-y-6" action="#" method="POST">
             <RedAlert alert={alert} alertClass={alertClass}/>
             <div>
-              <label htmlFor="cnpj" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="cnpj" className="block text-sm font-medium leading-6 ">
                 CNPJ
               </label>
               <div className="mt-2">
@@ -78,14 +80,14 @@ export default function Home() {
                   onChange={(e) => setCnpj(e.target.value)}
                   max={11}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="name" className="block text-sm font-medium leading-6 ">
                   name
                 </label>
               </div>
@@ -97,13 +99,13 @@ export default function Home() {
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="desc" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="desc" className="block text-sm font-medium leading-6 ">
                   Descrição da Loja
                 </label>
               </div>
@@ -114,7 +116,7 @@ export default function Home() {
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                   {desc}
                 </textarea>
@@ -123,7 +125,7 @@ export default function Home() {
             <div>
             
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 ">
                   password
                 </label>
               </div>
@@ -134,7 +136,7 @@ export default function Home() {
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -150,6 +152,7 @@ export default function Home() {
             <a href="/auth/login">Ja tem cadastro?</a>
           </form>
         </div>
+      </div>
       </div>
   );
   }

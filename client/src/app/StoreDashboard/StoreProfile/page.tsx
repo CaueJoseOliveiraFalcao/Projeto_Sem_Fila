@@ -33,14 +33,15 @@ export default function Home() {
   const [image, setImage] = useState<File | null>(null);
   const [UrlImage , setUrlImage] = useState('');
   const convertedUser = JSON.parse(user);
-  const userId = convertedUser.id ? convertedUser.id : '';
 
-  if(!convertedUser || !token){
+
+  if(convertedUser === null  || token === null){
     router.push('/auth/login/');
   }
 
 
     useEffect(() => {
+      const userId = convertedUser ? convertedUser.id : '';
       axios.post("http://localhost:8082/api/img/seachProfile" , {userId} , {
         headers : {
           authorization: `${token}`
@@ -81,6 +82,7 @@ export default function Home() {
     if (image != null){
       const formData = new FormData()
       formData.append('file' , image);
+      const userId = convertedUser.id;
       formData.append('userId', convertedUser.id);
       try {
         const response = await axios.post('http://localhost:8082/api/img/uploadProfile' , formData , {
@@ -99,24 +101,29 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col  items-center p-24">
         <p>Store Profile</p>
-        <ChangeStoreProfileInfo/>
-        <div>
-              <div className="flex items-center justify-between flex-col">
-                <label htmlFor="img" className="block text-sm font-medium leading-6 text-gray-900">
-                  Imagem de Perfil da Loja
-                </label>
-                <img className="profilePicture" width={'400px'} height={'400px'} src={UrlImage ? UrlImage : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'} alt="" />
-                <p>{!UrlImage ? 'ADICIONE UMA FOTO DE PERFIL' : ''}</p>
+        {token && 
+        <>
+          <ChangeStoreProfileInfo/>
+          <div>
+                <div className="flex items-center justify-between flex-col">
+                  <label htmlFor="img" className="block text-sm font-medium leading-6 text-gray-900">
+                    Imagem de Perfil da Loja
+                  </label>
+                  <img className="profilePicture" width={'400px'} height={'400px'} src={UrlImage ? UrlImage : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'} alt="" />
+                  <p>{!UrlImage ? 'ADICIONE UMA FOTO DE PERFIL' : ''}</p>
+                </div>
+                <h1 className="mt-7 text-center">ALterar foto de Perfil da loja</h1>
+                <div className="mt-2 d-flex flex-coll">
+                  <form id="imageUploadForm" className=" flex flex-col" method="POST" encType="multipart/form-data">
+                    <input type="file" className="bg-slate-200  rounded-sm  p-5 text-black" onChange={(e) => (setAndVerifyImg(e))} id="imageFileInput" name="file" accept="image/*" required/>
+                    <button onClick={(e) => (sendImg(e))} className="bg-blue-600 mt-5 p-2 rounded-xl text-white">Enviar</button>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                  </form>
+                </div>
               </div>
-              <h1 className="mt-7 text-center">ALterar foto de Perfil da loja</h1>
-              <div className="mt-2 d-flex flex-coll">
-                <form id="imageUploadForm" className=" flex flex-col" method="POST" encType="multipart/form-data">
-                  <input type="file" className="bg-slate-200  rounded-sm  p-5 text-black" onChange={(e) => (setAndVerifyImg(e))} id="imageFileInput" name="file" accept="image/*" required/>
-                  <button onClick={(e) => (sendImg(e))} className="bg-blue-600 mt-5 p-2 rounded-xl text-white">Enviar</button>
-                  {error && <p style={{ color: 'red' }}>{error}</p>}
-                </form>
-              </div>
-            </div>
+        </>
+        }
+        
     </main>
   );
 }

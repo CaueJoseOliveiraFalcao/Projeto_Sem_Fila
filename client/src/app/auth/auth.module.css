@@ -1,0 +1,13 @@
+.main_div{
+    background-color: rgb(230, 45, 45);
+    width: 30rem;
+    border-radius: 10px;
+    padding: 3rem;
+    color: white;
+}
+
+@media (max-width : 500px) {
+    .main_div{
+        width: 90%;
+    }
+}

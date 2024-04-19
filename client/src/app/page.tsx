@@ -1,7 +1,7 @@
 'use client'
 import axios from "axios";
 import { error } from "console";
-
+import Headerb from "./components/Headerb";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -17,8 +17,8 @@ export default function Home() {
   }, []);
   return (
     <main className="h-full">
-      
-      <h1 className="text-center text-4xl p-5">Painel de lojas</h1>
+      <Headerb/>
+      <h1 className="text-center text-4xl p-5">Lojas Disponiveis</h1>
       <div className="w-full justify-center flex items-center">
         <a  href="/StoreDashboard">Painel de controle da Loja</a>
       </div>

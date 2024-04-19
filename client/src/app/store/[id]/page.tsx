@@ -44,7 +44,6 @@ export default function PublicStorePage({ params }: { params: { id: string } }) 
                                     {user.clientname ? user.clientname : 'Senha sem Nome'} - {user.clientpassword} - {user.status === 'completed' ? 'Pedido Pronto' : 'Pedido em Preparo'}
                                 </li>
                             </div>
-´
                             ))}
                         </ul>
                     </div>
