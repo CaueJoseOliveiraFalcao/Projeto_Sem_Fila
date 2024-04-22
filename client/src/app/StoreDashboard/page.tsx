@@ -5,6 +5,7 @@ import CreatePasswordForm from "../components/CreatePasswordForm";
 import { useState } from "react";
 import LogoutStore from "../components/LogoutStore";
 import { TableOfUsers } from "../components/TableOfUsers";
+import Headerp from "../components/Headerp";
 export default function Home() {
   const router = useRouter();
   const user = localStorage.getItem('wait-App:user');
@@ -45,9 +46,10 @@ export default function Home() {
 
    
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-
-        <h1>Painel de Controle {storeName ? storeName : ''}</h1>
+  <div>
+    <Headerp/>
+        <main className="flex min-h-screen flex-col items-center">
+        <h1 className="mt-8 sm:text-2xl bg-red-700 p-3 text-white  rounded-xl">Painel de Controle {storeName ? storeName : ''}</h1>
         {storeName &&
             <>
             <CreatePasswordForm/>
@@ -57,5 +59,7 @@ export default function Home() {
         }
 
     </main>
+  </div>
+
   );
 }

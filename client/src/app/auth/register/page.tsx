@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Home() {
   const [cnpj , setCnpj] = useState('');
   const [name , setName] = useState('');
-  const [desc , setDesc] = useState('');
+  const [store_desc , setDesc] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [password , setPassword] = useState('');
@@ -36,7 +36,7 @@ export default function Home() {
       setAlertClass('');
     }
     else{
-      axios.post('http://localhost:8082/api/auth/register' , {name , cnpj , password })
+      axios.post('http://localhost:8082/api/auth/register' , {name , cnpj , password , store_desc })
       .then((res) => {
         router.push('/auth/login');
       }).catch((err) => {
@@ -80,7 +80,7 @@ export default function Home() {
                   onChange={(e) => setCnpj(e.target.value)}
                   max={11}
                   required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset text-black p-1  focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -99,7 +99,7 @@ export default function Home() {
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 p-1 ring-inset text-black focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -113,12 +113,12 @@ export default function Home() {
                 <textarea
                   id="desc"
                   name="desc"
-                  value={desc}
+                  value={store_desc}
                   onChange={(e) => setDesc(e.target.value)}
                   required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 p-1 text-black  shadow-sm ring-1 ring-inset   focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
-                  {desc}
+                  {store_desc}
                 </textarea>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Home() {
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block w-full rounded-md border-0 py-1.5  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 p-1  shadow-sm ring-1 ring-inset text-black focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>

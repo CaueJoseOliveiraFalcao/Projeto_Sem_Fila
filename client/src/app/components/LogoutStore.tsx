@@ -16,8 +16,6 @@ export default function LogoutStore() {
         })   
     }
     return (
-            <div>
-                <button onClick={logout}>Logout</button>
-            </div>
+                <a  className="text-white text-sm mr-5 cursor-pointer" onClick={logout}>Logout</a>
     )
 }

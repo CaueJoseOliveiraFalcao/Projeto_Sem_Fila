@@ -33,7 +33,7 @@ const ChangeStoreProfileInfo = () => {
         })
     }
     return (
-            <div className="w-3/5 my-32">
+            <div className="w-full sm:w-3/5 my-12">
                     <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
                         <p className="font-bold">Alerta</p>
                         <p>Apos Mudança de Nome ou Descrição sera Necessario Login </p>
@@ -49,12 +49,12 @@ const ChangeStoreProfileInfo = () => {
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="desc">
                         Descrição da loja
                     </label>
-                    <textarea onChange={(e) => (setDesc(e.target.value))} value={store_desc}  className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="desc">
+                    <textarea onChange={(e) => (setDesc(e.target.value))} value={store_desc}  className=" min-h-60 shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="desc">
     
                     </textarea>
                     </div>
                     <div className="flex items-center justify-between">
-                    <button onClick={(e) => Submit(e)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    <button onClick={(e) => Submit(e)} className="bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                         Confirmar Alterações
                     </button>
                     </div>

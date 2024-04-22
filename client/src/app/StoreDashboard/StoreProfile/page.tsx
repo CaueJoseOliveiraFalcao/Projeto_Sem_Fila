@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState , useEffect} from "react";
 import ChangeStoreProfileInfo from "@/app/components/ChangeStoreProfileInfo";
+import Headerp from "@/app/components/Headerp";
 export default function Home() {
   const router = useRouter();
   const token = localStorage.getItem('wait-App:token');
@@ -99,15 +100,16 @@ export default function Home() {
     }
   }
   return (
-    <main className="flex min-h-screen flex-col  items-center p-24">
-        <p>Store Profile</p>
+    <div>
+      <Headerp/>
+      <main className="flex min-h-screen flex-col  items-center ">
+        <h1 className="mt-6 sm:text-2xl bg-red-700 p-3 text-white  rounded-xl">Perfil da Loja</h1>
         {token && 
         <>
-          <ChangeStoreProfileInfo/>
-          <div>
+              <div className="mt-8 bg-white-400 rounded-xl shadow-xl p-3">
                 <div className="flex items-center justify-between flex-col">
                   <label htmlFor="img" className="block text-sm font-medium leading-6 text-gray-900">
-                    Imagem de Perfil da Loja
+                    Imagem de Perfil
                   </label>
                   <img className="profilePicture" width={'400px'} height={'400px'} src={UrlImage ? UrlImage : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'} alt="" />
                   <p>{!UrlImage ? 'ADICIONE UMA FOTO DE PERFIL' : ''}</p>
@@ -115,15 +117,19 @@ export default function Home() {
                 <h1 className="mt-7 text-center">ALterar foto de Perfil da loja</h1>
                 <div className="mt-2 d-flex flex-coll">
                   <form id="imageUploadForm" className=" flex flex-col" method="POST" encType="multipart/form-data">
-                    <input type="file" className="bg-slate-200  rounded-sm  p-5 text-black" onChange={(e) => (setAndVerifyImg(e))} id="imageFileInput" name="file" accept="image/*" required/>
-                    <button onClick={(e) => (sendImg(e))} className="bg-blue-600 mt-5 p-2 rounded-xl text-white">Enviar</button>
+                    <input type="file" className="bg-gray-100 rounded-md  rounded-sm  p-5 text-black" onChange={(e) => (setAndVerifyImg(e))} id="imageFileInput" name="file" accept="image/*" required/>
+                    <button onClick={(e) => (sendImg(e))} className="bg-red-700 mt-5 p-2 rounded-md text-white">Enviar</button>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                   </form>
                 </div>
               </div>
+          <ChangeStoreProfileInfo/>
+
         </>
         }
         
     </main>
+    </div>
+    
   );
 }

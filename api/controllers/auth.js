@@ -42,7 +42,7 @@ const  register = async (req,res) =>{
             where : {cnpj}
         });
         const userId = user.id
-
+        return res.status(200).json({msg : 'Usuario cadastrado'})
 
     }catch(error) {
         return res.status(422).json({msg : error});
@@ -104,7 +104,6 @@ const  register = async (req,res) =>{
 } 
 const logout = async (req, res) => {
     try {
-
         return res.status(200).json({ msg: 'Logout bem-sucedido' });
     } catch (error) {
         console.log(error);

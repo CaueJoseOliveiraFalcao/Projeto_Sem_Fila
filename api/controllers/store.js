@@ -48,10 +48,13 @@ const createNewClient =  async (req,res) => {
     }
     try{
         const existOtherPassword = await db.User.findOne({
-            where : {clientpassword}
+            where : {
+                clientpassword : clientpassword,
+                storeid : storeid
+            } 
         })
         if(existOtherPassword){
-            return res.status(422).json({msg : 'senha existente'});
+            return res.status(422).json({msg : 'Senha existente'});
         }
         const id = storeid;
         const existStore = await db.Store.findOne({
@@ -76,9 +79,6 @@ const createNewClient =  async (req,res) => {
 }
 const showClients = async (req,res) => {
     const {storeid } = req.body
-    if (!storeid){
-        return res.status(422).json({msg : 'Informe todos os dados'});
-    }
 
     try{
         const id = storeid
