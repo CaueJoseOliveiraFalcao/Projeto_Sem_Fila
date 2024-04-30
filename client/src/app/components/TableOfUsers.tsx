@@ -53,7 +53,7 @@ export const TableOfUsers = () => {
     }
     console.log(storeUsers);
     return(
-        <div className="w-full flex justify-center flex-col items-center">
+        <div className="w-full flex justify-center mb-10 flex-col items-center">
 
             <h1 className="mt-8 sm:text-2xl bg-red-700 mb-8 p-3 text-white  rounded-xl">Controle De Senhas</h1>
             <table className="table-fixed bg-red-700 p-0 sm:p-3 text-white rounded-lg shadow-xl md:w-1/2 w-full">
