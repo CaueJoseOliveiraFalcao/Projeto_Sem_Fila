@@ -64,7 +64,7 @@ const CreatePasswordForm = () => {
             
             <div className="flex items-center justify-between">
             <button onClick={Submit} className="bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                Enviar
+                Enviard
             </button>
             </div>
         </form>
