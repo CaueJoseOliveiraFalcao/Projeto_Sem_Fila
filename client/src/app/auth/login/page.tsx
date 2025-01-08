@@ -42,7 +42,7 @@ export default function Home() {
         localStorage.setItem("wait-App:user" ,  dataConverted);
         router.push('/StoreDashboard');
       }).catch((err) => {
-        setAlert(err.response.data.msg)
+        setAlert(err.response.data.msg);
         setAlertClass('');
       })
     }

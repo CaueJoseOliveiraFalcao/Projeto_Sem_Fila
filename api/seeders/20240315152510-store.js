@@ -23,10 +23,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('stores' , [{
+   await queryInterface.bulkInsert('Stores' , [{
     cnpj : '12345678901234',
     password : DefaultPassword,
     name : 'adminStore',
+    createdAt: new Date(), // Adiciona a data atual
+    updatedAt: new Date(), 
    }])
   },
 

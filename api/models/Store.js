@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Store',
+    tableName: 'Stores' // Especifica o nome da tabela no banco
   });
   return Store;
 };
