@@ -26,6 +26,7 @@ export default function Home() {
 
   }
 
+
   const handleValue = (e  :any) => {
     e.preventDefault();
     const isValid = validCnpj(cnpj)
@@ -39,7 +40,7 @@ export default function Home() {
       .then((res) => {
         router.push('/auth/login');
       }).catch((err) => {
-        console.log(err);
+        console.log(err.response.data.msg);
         setAlert(err.response.data.msg)
         setAlertClass('');
       })
